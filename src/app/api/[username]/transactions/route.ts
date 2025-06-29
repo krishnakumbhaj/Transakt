@@ -20,7 +20,7 @@ export async function GET(
 
     const user = JSON.parse(fs.readFileSync(detailsPath, 'utf-8'));
     const transactions = fs.existsSync(txnPath)
-      ? JSON.parse(fs.readFileSync(txnPath, 'utf-8')).reverse() // ⬅️ latest first
+      ? JSON.parse(fs.readFileSync(txnPath, 'utf-8'))
       : [];
 
     return NextResponse.json({ user, transactions });

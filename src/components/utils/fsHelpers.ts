@@ -40,7 +40,7 @@ export async function createUser(
       }))
     : [];
 
-  await fs.writeJson(path.join(userDir, 'transaction.json'), transactions, { spaces: 2 });
+  await fs.writeJson(path.join(userDir, 'transactions.json'), transactions, { spaces: 2 });
 
   const details = {
     name: username,

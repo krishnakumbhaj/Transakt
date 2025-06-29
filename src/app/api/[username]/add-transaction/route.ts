@@ -2,6 +2,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import path from 'path';
 import fs from 'fs/promises';
 
+// Define the Transaction interface according to your transaction structure
+interface Transaction {
+  id: string;
+  [key: string]: any;
+}
+
 export async function POST(
   req: NextRequest,
   context: { params: Promise<{ username: string }> }
@@ -19,7 +25,7 @@ export async function POST(
       return NextResponse.json({ message: 'User not found' }, { status: 404 });
     }
 
-    let transactions: any[] = [];
+    let transactions: Transaction[] = [];
     try {
       const data = await fs.readFile(transactionsPath, 'utf-8');
       transactions = JSON.parse(data);
@@ -27,7 +33,7 @@ export async function POST(
       transactions = [];
     }
 
-    const newTxn = {
+    const newTxn: Transaction = {
       ...body,
       id: Date.now().toString(),
     };
